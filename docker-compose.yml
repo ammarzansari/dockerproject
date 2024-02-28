@@ -1,0 +1,22 @@
+version: "3"
+services:
+  react:
+    build:
+      context: .  #can be any particular folder containing the files
+      dockerfile: Dockerfile.dev
+    ports:
+      - 1000:3000
+    volumes:
+      - /app/node_modules
+      - .:/app
+  #to run test container for testing
+  react-test:
+    build:
+      context: .  #can be any particular folder containing the files
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
+
+#when running "docker attach", this command connects to the primary process of the container, not any other processes.
